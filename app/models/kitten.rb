@@ -1,0 +1,3 @@
+class Kitten < ApplicationRecord
+  
+end
