@@ -2,10 +2,21 @@ class KittensController < ApplicationController
 
   def index
     @kittens = Kitten.all
+
+    respond_to do |format|
+      format.html  # index.html.erb
+      format.json  { render :json => @kittens }
+    end
   end
 
   def show
     @kitten = Kitten.find(params[:id])
+    respond_to do |format|
+
+      format.html # show.html.erb
+      format.json { render json: @kitten }
+
+    end
   end
 
   def new
@@ -13,10 +24,11 @@ class KittensController < ApplicationController
   end
 
   def create
+    @kitten = Kitten.new(kitten_params)
     if @kitten.save
-    redirect_to kitten_path, notice: "Kitten has been saved"
+    redirect_to kitten_path(@kitten), notice: "Kitten has been saved"
     else
-    render new_kitten_path
+    render new_kitten_url
     end
   end
 
@@ -25,9 +37,17 @@ class KittensController < ApplicationController
   end
 
   def update
-    kitten = current_account.kitten.find(params[:id])
-    kitten.update!(person_params)
-    redirect_to kitten_path
+    kitten = Kitten.find(params[:id])
+    kitten.update!(kitten_params)
+    redirect_to kitten_path(kitten)
+  end
+
+  def destroy
+    @kitten = Kitten.find(params[:id])
+    @kitten.delete
+    flash.notice="'#{@kitten.name}' record was deleted"
+
+    redirect_to root_url
   end
 
   private

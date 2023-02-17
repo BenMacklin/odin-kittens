@@ -1,0 +1,10 @@
+<div> All of the kittens below </div><br>
+
+<% @kittens.each do |kitten| %>
+<div>Kittens name:<%= link_to kitten.name, kitten_path(kitten) %> <%= button_to "Delete", kitten_path(kitten), :confirm => "Are you sure?", :method => :delete %> </div>
+<div>Kittens age:<%=  kitten.age %></div>
+<div>Kittens cuteness:<%=  kitten.cuteness %></div>
+<div>Kittens name:<%=  kitten.softness %></div><br>
+<% end %>
+
+<%= link_to "Add new kitten", "/kittens/new" %>

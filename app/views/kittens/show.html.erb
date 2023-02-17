@@ -1,0 +1,11 @@
+
+
+<div> Cat Details Below:
+Kittens name:<%=  @kitten.name %><br>
+Kittens age:<%=  @kitten.age %><br>
+Kittens cuteness:<%=  @kitten.cuteness %><br>
+Kittens name:<%=  @kitten.softness %> </div>
+
+<%= link_to "Back to home", root_url  %><br>
+<%= link_to "Edit Details", edit_kitten_path(@kitten)  %>
+<%= button_to "Delete", kitten_path(@kitten), :confirm => "Are you sure?", :method => :delete %>
